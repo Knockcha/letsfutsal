@@ -2,6 +2,7 @@ set foreign_key_checks = 0;
 drop table if exists `letsfutsal`.`user`;
 drop table if exists `letsfutsal`.`team`;
 drop table if exists `letsfutsal`.`team_member`;
+drop table if exists `letsfutsal`.`entity`;
 drop table if exists `letsfutsal`.`stadium`;
 drop table if exists `letsfutsal`.`game_match`;
 drop table if exists `letsfutsal`.`match_individual_players`;
@@ -11,6 +12,7 @@ drop table if exists `letsfutsal`.`free_board_category`;
 drop table if exists `letsfutsal`.`free_board_comment`;
 set foreign_key_checks = 1;
 
+-- 회원
 create table `letsfutsal`.`user`
 (
   `user_id`            bigint auto_increment primary key,
@@ -18,7 +20,7 @@ create table `letsfutsal`.`user`
   `password`           varchar(255) not null,
   `nickname`           varchar(30)  not null,
   `created_at`         datetime              default current_timestamp(),
-  `gender`             enum('MALE', 'FEMALE')   not null,
+  `gender`             enum('MALE', 'FEMALE') not null,
   `preferred_position` varchar(30) null,
   `profile_image`      mediumblob null,
   `introduction`       text null,
@@ -26,6 +28,7 @@ create table `letsfutsal`.`user`
   `grade`              int          not null default 0
 );
 
+-- 팀
 create table `letsfutsal`.`team`
 (
   `team_id`       bigint auto_increment primary key,
@@ -39,6 +42,7 @@ create table `letsfutsal`.`team`
   constraint `fk_team_leader` foreign key (`leader_id`) references `letsfutsal`.`user` (`user_id`)
 );
 
+-- 팀 멤버 목록
 create table `letsfutsal`.`team_member`
 (
   `team_id`   bigint not null,
@@ -49,6 +53,22 @@ create table `letsfutsal`.`team_member`
   foreign key (`user_id`) references `letsfutsal`.`user` (`user_id`)
 );
 
+-- 회원/팀 묶음
+create table `letsfutsal`.`entity`
+(
+  `entity_id`   bigint auto_increment primary key,
+  `entity_type` enum('USER', 'TEAM') not null,
+  `user_id`     bigint null,
+  `team_id`     bigint null,
+  foreign key (`user_id`) references `letsfutsal`.`user` (`user_id`),
+  foreign key (`team_id`) references `letsfutsal`.`team` (`team_id`),
+  constraint `chk_entity_one_of` check (
+    (entity_type = 'USER' and user_id is not null and team_id is null) or
+    (entity_type = 'TEAM' and team_id is not null and user_id is null)
+    )
+);
+
+-- 구장
 create table `letsfutsal`.`stadium`
 (
   `stadium_id`    bigint auto_increment primary key,
@@ -60,16 +80,23 @@ create table `letsfutsal`.`stadium`
   `introduction`  text null
 );
 
+-- 경기 (개인, 팀, 대여 모두 포함)
 create table `letsfutsal`.`game_match`
 (
-  `match_id`       bigint auto_increment primary key,
-  `stadium_id`     bigint   not null,
-  `match_type`     enum('INDIVIDUAL', 'TEAM', 'RENT') not null,
-  `match_datetime` datetime not null,
-  `status`         tinyint  not null default 0,
-  foreign key (`stadium_id`) references `letsfutsal`.`stadium` (`stadium_id`)
+  `match_id`         bigint auto_increment primary key,
+  `stadium_id`       bigint   not null,
+  `renter_entity_id` bigint null,
+  `match_type`       enum('INDIVIDUAL', 'TEAM', 'RENT') not null,
+  `match_datetime`   datetime not null,
+  `gender`           enum('MALE', 'FEMALE', 'BOTH') not null,
+  `min_grade`        int      not null,
+  `max_grade`        int      not null,
+  `status`           tinyint  not null default 0,
+  foreign key (`stadium_id`) references `letsfutsal`.`stadium` (`stadium_id`),
+  foreign key (`renter_entity_id`) references `letsfutsal`.`entity` (`entity_id`)
 );
 
+-- 개인 경기
 create table `letsfutsal`.`match_individual_players`
 (
   `match_id` bigint not null,
@@ -79,6 +106,7 @@ create table `letsfutsal`.`match_individual_players`
   foreign key (`user_id`) references `letsfutsal`.`user` (`user_id`)
 );
 
+-- 팀 경기
 create table `letsfutsal`.`match_team_participants`
 (
   `match_id` bigint not null,
@@ -88,12 +116,14 @@ create table `letsfutsal`.`match_team_participants`
   foreign key (`team_id`) references `letsfutsal`.`team` (`team_id`)
 );
 
+-- 자유 게시판 카테고리
 create table `letsfutsal`.`free_board_category`
 (
   `cate_id`   bigint auto_increment primary key,
   `cate_name` varchar(50) not null
 );
 
+-- 자유 게시판
 create table `letsfutsal`.`free_board`
 (
   `article_id` bigint auto_increment primary key,
@@ -101,11 +131,12 @@ create table `letsfutsal`.`free_board`
   `author_id`  bigint       not null,
   `title`      varchar(100) not null,
   `content`    text         not null,
-  `views`      bigint       not null,
+  `views`      bigint       not null default 0,
   foreign key (`cate_id`) references `letsfutsal`.`free_board_category` (`cate_id`),
   foreign key (`author_id`) references `letsfutsal`.`user` (`user_id`)
 );
 
+-- 자유 게시판 덧글
 create table `letsfutsal`.`free_board_comment`
 (
   `comment_id` bigint auto_increment primary key,
