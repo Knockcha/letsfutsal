@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/eclipse,gradle,intellij+all,java,linux,maven,visualstudiocode,windows
-# Edit at https://www.toptal.com/developers/gitignore?templates=eclipse,gradle,intellij+all,java,linux,maven,visualstudiocode,windows
+# Created by https://www.toptal.com/developers/gitignore/api/java,windows,linux,macos,maven,gradle,eclipse,intellij+all,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=java,windows,linux,macos,maven,gradle,eclipse,intellij+all,visualstudiocode
 
 ### Eclipse ###
 .metadata
@@ -61,7 +61,7 @@ local.properties
 
 # Uncomment this line if you wish to ignore the project description file.
 # Typically, this file would be tracked if it contains build/dependency configurations:
-#.project
+.project
 
 ### Eclipse Patch ###
 # Spring Boot Tooling
@@ -149,11 +149,9 @@ fabric.properties
 ### Intellij+all Patch ###
 # Ignore everything but code style settings and run configurations
 # that are supposed to be shared within teams.
-
 .idea/*
-
-!.idea/codeStyles
-!.idea/runConfigurations
+# !.idea/codeStyles
+# !.idea/runConfigurations
 
 ### Java ###
 # Compiled class file
@@ -195,6 +193,38 @@ replay_pid*
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### macOS Patch ###
+# iCloud generated files
+*.icloud
 
 ### Maven ###
 target/
@@ -285,7 +315,4 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-# End of https://www.toptal.com/developers/gitignore/api/eclipse,gradle,intellij+all,java,linux,maven,visualstudiocode,windows
-
-# This is just no
-.idea/**/codeStyleConfig.xml
+# End of https://www.toptal.com/developers/gitignore/api/java,windows,linux,macos,maven,gradle,eclipse,intellij+all,visualstudiocode
