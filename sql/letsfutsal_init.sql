@@ -22,7 +22,6 @@ create table `letsfutsal`.`user`
   `created_at`         datetime              default current_timestamp(),
   `gender`             enum('MALE', 'FEMALE') not null,
   `preferred_position` varchar(30) null,
-  `profile_image`      mediumblob null,
   `introduction`       text null,
   `point`              bigint       not null default 0,
   `grade`              int          not null default 0
@@ -32,12 +31,12 @@ create table `letsfutsal`.`user`
 create table `letsfutsal`.`team`
 (
   `team_id`       bigint auto_increment primary key,
+  `team_name`     varchar(100) not null,
   `leader_id`     bigint not null,
   `gender`        enum('MALE', 'FEMALE', 'BOTH') null,
   `min_grade`     int null,
   `max_grade`     int null,
   `region`        varchar(100) null,
-  `profile_image` mediumblob null,
   `introduction`  text null,
   constraint `fk_team_leader` foreign key (`leader_id`) references `letsfutsal`.`user` (`user_id`)
 );
@@ -76,7 +75,6 @@ create table `letsfutsal`.`stadium`
   `location`      varchar(300) not null,
   `start_hour`    time         not null,
   `end_hour`      time         not null,
-  `stadium_image` mediumblob null,
   `introduction`  text null
 );
 
