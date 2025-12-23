@@ -24,7 +24,7 @@ create table `letsfutsal`.`user`
   `preferred_position` varchar(30) null, -- 선호 포지션
   `introduction`       text null, -- 자기 소개
   `point`              bigint       not null default 0, -- 누적 경험치 포인트
-  `grade`              int          not null default 0 -- 변동 가능한 실력 등급
+  `grade`              int          not null default 0 -- 변동 가능한 실력 등급 (0 ~ 3)
 );
 
 -- 팀
@@ -34,8 +34,8 @@ create table `letsfutsal`.`team`
   `team_name`     varchar(100) not null,
   `leader_id`     bigint not null,
   `gender`        enum('MALE', 'FEMALE', 'BOTH') null,
-  `min_grade`     int null,
-  `max_grade`     int null,
+  `min_grade`     int null, -- (0 ~ 3)
+  `max_grade`     int null, -- (0 ~ 3)
   `region`        varchar(100) null, -- 개략적인 지역 (서울, 충북 등)
   `introduction`  text null, -- 팀 소개
   foreign key (`leader_id`) references `letsfutsal`.`user` (`user_id`)
@@ -87,8 +87,8 @@ create table `letsfutsal`.`game_match`
   `match_type`       enum('INDIVIDUAL', 'TEAM', 'RENT') not null,
   `match_datetime`   datetime not null,
   `gender`           enum('MALE', 'FEMALE', 'BOTH') not null,
-  `min_grade`        int      not null,
-  `max_grade`        int      not null,
+  `min_grade`        int      not null, -- (0 ~ 3)
+  `max_grade`        int      not null, -- (0 ~ 3)
   `status`           tinyint  not null default 0,
   foreign key (`stadium_id`) references `letsfutsal`.`stadium` (`stadium_id`),
   foreign key (`renter_entity_id`) references `letsfutsal`.`entity` (`entity_id`)
@@ -124,12 +124,12 @@ create table `letsfutsal`.`free_board_category`
 -- 자유 게시판
 create table `letsfutsal`.`free_board`
 (
-  `article_id` bigint auto_increment primary key,
-  `cate_id`    bigint       not null,
-  `author_id`  bigint       not null,
+  `article_id` bigint auto_increment primary key, -- 글 ID (자동 생성)
+  `cate_id`    bigint       not null, -- 카테고리 ID
+  `author_id`  bigint       not null, -- 작성자(회원) ID
   `title`      varchar(100) not null,
   `content`    text         not null,
-  `views`      bigint       not null default 0,
+  `views`      bigint       not null default 0, -- 조회수
   foreign key (`cate_id`) references `letsfutsal`.`free_board_category` (`cate_id`),
   foreign key (`author_id`) references `letsfutsal`.`user` (`user_id`)
 );
