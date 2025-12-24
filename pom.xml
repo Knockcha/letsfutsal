@@ -6,6 +6,7 @@
 
   <groupId>io.github.wizwix</groupId>
   <artifactId>letsfutsal</artifactId>
+  <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
 
   <dependencies>
@@ -98,7 +99,9 @@
       <groupId>org.mybatis</groupId>
       <artifactId>mybatis-spring</artifactId>
       <version>3.0.5</version>
-    </dependency>
+		</dependency>
+
+    
   </dependencies>
 
   <build>
