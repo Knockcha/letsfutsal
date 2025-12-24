@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.*, team.dto.TeamDto" %>
+<%@ page import="io.github.wizwix.letsfutsal.dto.TeamDTO" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,18 +14,18 @@
 
 	<ul>
 		<%
-    List<TeamDto> teams = (List<TeamDto>) request.getAttribute("teams");
+    List<TeamDTO> teams = (List<TeamDTO>) request.getAttribute("teams");
 
     if (teams == null || teams.isEmpty()) {
 		%>
 		<li>등록된 팀이 없습니다.</li>
 		<%
     } else {
-        for (TeamDto t : teams) {
+        for (TeamDTO t : teams) {
 		%>
 		<li><a
-			href="<%=request.getContextPath()%>/team/profile/<%=t.getTeam_id()%>">
-				<%=t.getTeam_id()%>
+			href="<%=request.getContextPath()%>/team/profile/<%=t.getTeamId()%>">
+				<%=t.getTeamId()%>
 		</a></li>
 		<%
         }
