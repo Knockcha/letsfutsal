@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="io.github.wizwix.letsfutsal.dto.TeamDTO" %>
 <%
   TeamDTO team = (TeamDTO) request.getAttribute("team");
@@ -19,9 +18,7 @@
   <title>Insert title here</title>
 </head>
 <body>
-
 <h2>${team.team_id}</h2>
-
 팀 이름 :
 <%=team.getTeamId()%><br> 성별 :
 <%=team.getGender()%><br> 등급 :
@@ -30,9 +27,7 @@
 <%=team.getMaxGrade()%><br> 지역 :
 <%=team.getRegion()%><br> 소개 :
 <%=team.getIntroduction()%><br>
-
 <br>
 <a href="${pageContext.request.contextPath}/team/list">목록으로</a>
-
 </body>
 </html>

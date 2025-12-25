@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -86,7 +85,6 @@
   <h2>자유 게시판 글 쓰기</h2>
   <%-- Spring Controller의 @PostMapping("/free/write")와 매핑됩니다 --%>
   <form action="${pageContext.request.contextPath}/free/write" method="post" onsubmit="return validateForm()">
-
     <div class="form-group">
       <label for="cateId">카테고리</label>
       <select name="cateId" id="cateId" required>
@@ -96,33 +94,27 @@
         <option value="3">정보</option>
       </select>
     </div>
-
     <%-- 실제 구현 시 세션의 사용자 ID를 주입해야 합니다 --%>
     <input type="hidden" name="authorId" value="101">
-
     <div class="form-group">
       <label for="title">제목</label>
       <input type="text" name="title" id="title" maxlength="100" placeholder="제목을 입력하세요 (최대 100자)" required>
     </div>
-
     <div class="form-group">
       <label for="content">내용</label>
       <textarea name="content" id="content" placeholder="풋살 커뮤니티 매너를 지켜 내용을 작성해주세요" required></textarea>
     </div>
-
     <div class="btn-group">
       <button type="submit" class="btn-submit">등록하기</button>
       <button type="button" class="btn-cancel" onclick="history.back()">취소</button>
     </div>
   </form>
 </div>
-
 <script>
   // 간단한 클라이언트 측 유효성 검사
   function validateForm() {
     const title = document.getElementsByName('title')[0].value;
     const content = document.getElementsByName('content')[0].value;
-
     if (title.trim().length < 2) {
       alert('제목을 2자 이상 입력해주세요.');
       return false;

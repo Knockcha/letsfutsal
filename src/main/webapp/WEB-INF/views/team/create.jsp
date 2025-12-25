@@ -7,15 +7,12 @@
   <title>Insert title here</title>
 </head>
 <body>
-
 <h2>팀 생성</h2>
-
 <form method="post" action="${pageContext.request.contextPath}/team">
   팀 이름 : <input name="team_id"><br>
   성별 : <input type="radio" name="gender" value="혼성">혼성
   <input type="radio" name="gender" value="남성">남성
   <input type="radio" name="gender" value="여성">여성<br>
-
   최소 등급 : <select name="min_grade">
   <option value="무관">무관</option>
   <option value="1">1 초보</option>
@@ -37,9 +34,7 @@
 </select><br> 소개 :<br>
   <textarea name="introduction"></textarea>
   <br>
-
   <button type="submit">생성하기</button>
 </form>
-
 </body>
 </html>

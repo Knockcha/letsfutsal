@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeamRepository {
-
   private static final List<TeamDTO> teams = new ArrayList<>();
 
   public List<TeamDTO> findAll() {
@@ -15,8 +14,8 @@ public class TeamRepository {
 
   public TeamDTO findById(String team_id) {
     for (TeamDTO t : teams) {
+      // FIXME
       if (t.getTeamId() == t.getTeamId()) {
-        // FIXME
         return t;
       }
     }
