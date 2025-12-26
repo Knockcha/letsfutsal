@@ -11,37 +11,37 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/team")
 public class TeamController {
 
-	private final TeamService service;
-	
-	public TeamController(TeamService service) {
+  private final TeamService service;
+
+  public TeamController(TeamService service) {
         this.service = service;
     }
-	
-	@GetMapping("/")
+
+  @GetMapping("/")
     public String rootRedirect() {
         return "redirect:/team";
     }
-	
-	// 메인
-	@GetMapping("")
+
+  // 메인
+  @GetMapping("")
     public String main() {
         return "team/main";
     }
 
-	// 전체 목록
-	@GetMapping("/list")
-	public String list(Model model) {
-		model.addAttribute("teams", service.list());
-		return "team/list";
-	}
+  // 전체 목록
+  @GetMapping("/list")
+  public String list(Model model) {
+    model.addAttribute("teams", service.list());
+    return "team/list";
+  }
 
-	// 생성 폼
-	@GetMapping("/create")
-	public String createForm() {
-		return "team/create";
-	}
+  // 생성 폼
+  @GetMapping("/create")
+  public String createForm() {
+    return "team/create";
+  }
 
-	@PostMapping("/create")
+  @PostMapping("/create")
     public String create(@ModelAttribute TeamDTO team) {
         // 임시 팀장 ID (로그인 기능 전이라서 임시값)
         team.setLeaderId(1L); // 로그인 연동 시 수정해야
@@ -51,11 +51,18 @@ public class TeamController {
         return "redirect:/team/profile/" + team.getTeamId();
     }
 
-	// 팀 개별 페이지
-	@GetMapping("/profile/{teamId}")
-	public String profile(@PathVariable("teamId") long teamId, Model model) {
-	    model.addAttribute("team", service.get(teamId));
-	    return "team/profile";
-	}
+  // 팀 개별 페이지
+  @GetMapping("/profile/{teamId}")
+  public String profile(@PathVariable("teamId") long teamId, Model model) {
+      model.addAttribute("team", service.get(teamId));
+      return "team/profile";
+  }
+
+  // 팀 가입 페이지
+  @GetMapping("/join/{teamId}")
+  public String joinForm(@PathVariable("teamId") long teamId, Model model) {
+    model.addAttribute("team", service.get(teamId));
+    return "team/join";
+  }
 
 }
