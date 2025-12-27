@@ -79,6 +79,6 @@
         <button type="submit">회원가입하기</button>
     </form>
 
-    <p>이미계정이 있으신가요? <a href="${pageContext.request.contextPath}/user/login">로그인하기</a></p>
+    <p>이미 계정이 있으신가요? <a href="${pageContext.request.contextPath}/user/login">로그인하기</a></p>
 </body>
 </html>
