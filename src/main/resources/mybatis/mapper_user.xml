@@ -16,6 +16,29 @@
            join letsfutsal.team_member tm on t.team_id = tm.team_id
     where tm.user_id = #{userId}
   </select>
+  <select id="selectTopUsersByGrade" parameterType="int" resultType="io.github.wizwix.letsfutsal.dto.UserDTO">
+    select *
+    from letsfutsal.user
+    <if test="grade != -1">
+      where grade = #{grade}
+    </if>
+    order by point desc, user_id asc
+    limit 10
+  </select>
+  <select id="selectTopUsersByGradeAndPosition" resultType="io.github.wizwix.letsfutsal.dto.UserDTO">
+    select *
+    from letsfutsal.user
+    <where>
+      <if test="grade != -1">
+        grade = #{grade}
+      </if>
+      <if test="position != null and position != ''">
+        and preferred_position = #{position}
+      </if>
+    </where>
+    order by point desc, user_id asc
+    limit 10
+  </select>
   <select id="selectUserByEmail" parameterType="string" resultType="io.github.wizwix.letsfutsal.dto.UserDTO">
     select *
     from letsfutsal.user

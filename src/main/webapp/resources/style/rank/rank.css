@@ -1,0 +1,64 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+.filter-section {
+  margin: 20px 0;
+  padding: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}
+
+.filter-section button {
+  padding: 8px 16px;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 3px;
+}
+
+.filter-section button.active {
+  background-color: #17a2b8;
+  color: white;
+  border-color: #17a2b8;
+}
+
+.filter-section button:hover {
+  background-color: #e0f7fa;
+}
+
+.filter-section button.active:hover {
+  background-color: #138496;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #17a2b8;
+  color: white;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.rank-number {
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.gold { color: #FFD700; }
+.silver { color: #C0C0C0; }
+.bronze { color: #CD7F32; }

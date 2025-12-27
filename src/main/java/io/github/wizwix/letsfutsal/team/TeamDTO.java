@@ -1,9 +1,6 @@
 package io.github.wizwix.letsfutsal.team;
 
 import io.github.wizwix.letsfutsal.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 public class TeamDTO {
   Gender gender;
