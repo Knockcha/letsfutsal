@@ -1,9 +1,22 @@
 package io.github.wizwix.letsfutsal.dto;
 
-import lombok.Data;
-
-@Data
 public class CategoryDTO {
-  long cateId;
-  String cateName;
+  private long cateId;
+  private String cateName;
+
+  public long getCateId() {
+    return cateId;
+  }
+
+  public void setCateId(long cateId) {
+    this.cateId = cateId;
+  }
+
+  public String getCateName() {
+    return cateName;
+  }
+
+  public void setCateName(String cateName) {
+    this.cateName = cateName;
+  }
 }

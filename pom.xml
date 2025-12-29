@@ -16,13 +16,6 @@
       <artifactId>annotations</artifactId>
       <version>26.0.2-1</version>
     </dependency>
-    <!-- Project Lombok (@Data, @Getter, @Setter 등) -->
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <version>1.18.42</version>
-      <scope>provided</scope>
-    </dependency>
     <!-- JDBC + HikariCP -->
     <dependency>
       <groupId>com.mysql</groupId>
@@ -156,19 +149,13 @@
         </executions>
       </plugin>
 
-      <!-- Project Lombok Annotation Processor -->
+      <!-- Maven Compiler Plugin -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.14.1</version>
         <configuration>
-          <annotationProcessorPaths>
-            <path>
-              <groupId>org.projectlombok</groupId>
-              <artifactId>lombok</artifactId>
-              <version>1.18.42</version>
-            </path>
-          </annotationProcessorPaths>
+          <parameters>true</parameters>
         </configuration>
       </plugin>
       <plugin>
